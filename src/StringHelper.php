@@ -56,7 +56,7 @@ class StringHelper {
             self::FRIDAY => 'วันศุกร์',
             self::SATURDAY => 'วันเสาร์' 
     );
-    protected static $thaiDays = array(
+    protected static $thaiShortDays = array(
     		self::SUNDAY => 'อา.',
     		self::MONDAY => 'จ.',
     		self::TUESDAY => 'อ.',
