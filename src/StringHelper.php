@@ -56,6 +56,15 @@ class StringHelper {
             self::FRIDAY => 'วันศุกร์',
             self::SATURDAY => 'วันเสาร์' 
     );
+    protected static $thaiDays = array(
+    		self::SUNDAY => 'อา.',
+    		self::MONDAY => 'จ.',
+    		self::TUESDAY => 'อ.',
+    		self::WEDNESDAY => 'พ.',
+    		self::THURSDAY => 'พฤ.',
+    		self::FRIDAY => 'ศ.',
+    		self::SATURDAY => 'ส.'
+    );
     protected static $thaiMonths = array(
             self::JANUARY => "มกราคม",
             self::FEBRUARY => "กุมภาพันธ์",
@@ -69,6 +78,32 @@ class StringHelper {
             self::OCTOBER => "ตุลาคม",
             self::NOVEMBER => "พฤศจิกายน",
             self::DECEMBER => "ธันวาคม" 
+    );
+    protected static $thaiShortMonths = array(
+    		self::JANUARY => "ม.ค.",
+    		self::FEBRUARY => "ก.พ.",
+    		self::MARCH => "มี.ค.",
+    		self::APRIL => "เม.ย.",
+    		self::MAY => "พ.ค.",
+    		self::JUNE => "มิ.ย.",
+    		self::JULY => "ก.ค.",
+    		self::AUGUST => "ส.ค.",
+    		self::SEPTEMBER => "ก.ย.",
+    		self::OCTOBER => "ต.ค.",
+    		self::NOVEMBER => "พ.ย.",
+    		self::DECEMBER => "ธ.ค."
+    );
+    protected static $thaiNumbers = array(
+    	0 => '๐',
+    	1 => '๑',
+    	2 => '๒',
+    	3 => '๓',
+    	4 => '๔',
+    	5 => '๕',
+    	6 => '๖',
+    	7 => '๗',
+    	8 => '๘',
+    	9 => '๙',
     );
     public static function translateDateStringToThai($inputString) {
         $output = '';
