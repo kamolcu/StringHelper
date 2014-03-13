@@ -71,6 +71,31 @@ class StringHelper {
             self::DECEMBER => "ธันวาคม" 
     );
     public static function translateDateStringToThai($inputString) {
+        $output = '';
+        if(is_string($inputString)){
+            $datetime = strtotime($inputString);
+            if($datetime){
+                $output = strtoupper($inputString);
+                foreach(self::$months as $key => $value){
+                    $value = strtoupper($value);
+                    $pos = strrpos($output, $value);
+                    if($pos !== false){
+                        $output = str_replace($value, self::$thaiMonths[$key], $output);
+                        break;
+                    }
+                }
+                foreach(self::$days as $key => $value){
+                    $value = strtoupper($value);
+                    $pos = strrpos($output, $value);
+                    if($pos !== false){
+                        $output = str_replace($value, self::$thaiDays[$key], $output);
+                        break;
+                    }
+                }
+                $output = str_replace('-', ' ', $output);
+            }
+        }
+        return $output;
     }
     private static function getArrayValueMap($arrayMap, $arrayOutput, $inputValue) {
         // default return value
@@ -99,4 +124,17 @@ class StringHelper {
     public static function getThaiDay($day) {
         return self::getArrayValueMap(self::$days, self::$thaiDays, $day);
     }
+    public static function getBuddhistCalendarYear($yearInput, $withBuddhistYearPrefix = false, $prefix = 'พ.ศ.') {
+        $output = '';
+        if(is_numeric($yearInput) && is_int(intVal($yearInput))){
+            $yearOutput = intVal($yearInput) + 543;
+            if(is_bool($withBuddhistYearPrefix) && $withBuddhistYearPrefix && is_string($prefix)){
+                $output = $prefix . ' ' . $yearOutput;
+            }else{
+                $output = $yearOutput;
+            }
+        }
+        return $output;
+    }
+    // TODO: Thai numberic chars
 }
