@@ -124,7 +124,8 @@ class GetThaiMonthTest extends \PHPUnit_Framework_TestCase{
         $shortFormat = true;
         foreach(StringHelper::getMonthsArray() as $key => $value){
             $actual = StringHelper::getThaiMonth($value, $shortFormat);
-            $this->assertEquals(StringHelper::getThaiShortMonthsArray()[$key], $actual);
+            $expected = StringHelper::getThaiShortMonthsArray()[$key];
+            $this->assertEquals($expected, $actual);
         }
     }
 }

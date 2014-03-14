@@ -100,7 +100,8 @@ class GetThaiDayTest extends \PHPUnit_Framework_TestCase{
         $shortFormat = true;
         foreach(StringHelper::getDaysArray() as $key => $value){
             $actual = StringHelper::getThaiDay($value, $shortFormat);
-            $this->assertEquals(StringHelper::getThaiShortDaysArray()[$key], $actual);
+            $expected = StringHelper::getThaiShortDaysArray()[$key];
+            $this->assertEquals($expected, $actual);
         }
     }
 }
