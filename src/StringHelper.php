@@ -108,6 +108,18 @@ class StringHelper{
     public static function getThaiNumberArray(){
         return self::$thaiNumbers;
     }
+    public static function getMonthsArray(){
+        return self::$months;
+    }
+    public static function getDaysArray(){
+        return self::$days;
+    }
+    public static function getThaiShortMonthsArray(){
+        return self::$thaiShortMonths;
+    }
+    public static function getThaiShortDaysArray(){
+        return self::$thaiShortDays;
+    }
     public static function getThaiNumber($number){
         $output = '';
         if(is_numeric($number)){
@@ -194,11 +206,19 @@ class StringHelper{
         }
         return $output;
     }
-    public static function getThaiMonth($month){
-        return self::getArrayValueMap(self::$months, self::$thaiMonths, $month);
+    public static function getThaiMonth($month, $shortFormat = false){
+        $outputArr = self::$thaiMonths;
+        if($shortFormat === true){
+            $outputArr = self::$thaiShortMonths;
+        }
+        return self::getArrayValueMap(self::$months, $outputArr, $month);
     }
-    public static function getThaiDay($day){
-        return self::getArrayValueMap(self::$days, self::$thaiDays, $day);
+    public static function getThaiDay($day, $shortFormat = false){
+        $outputArr = self::$thaiDays;
+        if($shortFormat === true){
+        	$outputArr = self::$thaiShortDays;
+        }
+        return self::getArrayValueMap(self::$days, $outputArr, $day);
     }
     public static function getBuddhistCalendarYear($yearInput, $withBuddhistYearPrefix = false, $prefix = 'พ.ศ.'){
         $output = '';
