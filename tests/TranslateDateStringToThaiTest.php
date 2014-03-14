@@ -3,7 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/StringHelper.php';
 
 use Kamolcu\StringHelper;
-class TranslationTest extends \PHPUnit_Framework_TestCase {
+class TranslateDateStringToThaiTest extends \PHPUnit_Framework_TestCase{
     // Days
     const SUNDAY = 0;
     const MONDAY = 1;
@@ -71,9 +71,7 @@ class TranslationTest extends \PHPUnit_Framework_TestCase {
             self::NOVEMBER => "พฤศจิกายน",
             self::DECEMBER => "ธันวาคม" 
     );
-    function setUp(){
-        date_default_timezone_set('Asia/Bangkok');
-    }
+    
     public function testTranslationInvalidInput(){
         $expect = '';
         $actual = StringHelper::translateDateStringToThai('xx January');
@@ -169,45 +167,7 @@ class TranslationTest extends \PHPUnit_Framework_TestCase {
             $this->assertEquals(self::$thaiDays[$key], $actual);
         }
     }
-    public function testGetBuddhistCalendarYear(){
-        $actual = StringHelper::getBuddhistCalendarYear(array());
-        $this->assertEquals('', $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('0');
-        $this->assertEquals(543, $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('-10');
-        $this->assertEquals('533', $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('2014', false);
-        $this->assertEquals('2557', $actual);
-        $actual = StringHelper::getBuddhistCalendarYear('2014', array());
-        $this->assertEquals('2557', $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('2014', true);
-        $this->assertEquals('พ.ศ. 2557', $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('2014', true, 'พุทธศักราช');
-        $this->assertEquals('พุทธศักราช 2557', $actual);
-        
-        $actual = StringHelper::getBuddhistCalendarYear('2014', true, array());
-        $this->assertEquals('2557', $actual);
-    }
-    public function testGet4DigitsYearPos(){
-        $actual = StringHelper::get4DigitsYearPos(array());
-        $this->assertEquals(-1, $actual);
-        $actual = StringHelper::get4DigitsYearPos('xxx 2008');
-        $this->assertEquals(-1, $actual);
-        
-        $actual = StringHelper::get4DigitsYearPos('2008');
-        $this->assertEquals(0, $actual);
-        
-        $actual = StringHelper::get4DigitsYearPos('July 2008');
-        $this->assertEquals(5, $actual);
-        
-        $actual = StringHelper::get4DigitsYearPos('25 AUG 2008 17:30');
-        $this->assertEquals(7, $actual);
-    }
+    
     public function testTranslationDateFormats(){
         $inputArr = array(
                 '30-June',
