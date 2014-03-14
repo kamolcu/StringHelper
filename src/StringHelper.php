@@ -2,7 +2,7 @@
 
 namespace Kamolcu;
 
-class StringHelper {
+class StringHelper{
     // Days
     const SUNDAY = 0;
     const MONDAY = 1;
@@ -105,6 +105,26 @@ class StringHelper {
             8 => '๘',
             9 => '๙' 
     );
+    public static function getThaiNumberArray(){
+        return self::$thaiNumbers;
+    }
+    public static function getThaiNumber($number){
+        $output = '';
+        if(is_numeric($number)){
+            $number = strval($number);
+        }
+        if(is_string($number)){
+            for($i = 0;$i < strlen($number);$i++){
+                $char = substr($number, $i, 1);
+                if(is_numeric($char)){
+                    $output .= self::getThaiNumberArray()[intVal($char)];
+                }else{
+                    $output .= $char;
+                }
+            }
+        }
+        return $output;
+    }
     public static function translateDateStringToThai($inputString){
         $output = '';
         if(is_string($inputString)){
@@ -192,5 +212,4 @@ class StringHelper {
         }
         return $output;
     }
-    // TODO: Thai numberic chars
 }
