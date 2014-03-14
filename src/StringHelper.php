@@ -155,6 +155,11 @@ class StringHelper{
                 foreach(self::$months as $key => $value){
                     $value = strtoupper($value);
                     $pos = strrpos($output, $value);
+                    if($pos === false){
+                        // try short pattern
+                        $value = substr($value, 0, 3);
+                        $pos = strrpos($output, $value);
+                    }
                     if($pos !== false){
                         $output = str_replace($value, self::$thaiMonths[$key], $output);
                         break;
@@ -216,7 +221,7 @@ class StringHelper{
     public static function getThaiDay($day, $shortFormat = false){
         $outputArr = self::$thaiDays;
         if($shortFormat === true){
-        	$outputArr = self::$thaiShortDays;
+            $outputArr = self::$thaiShortDays;
         }
         return self::getArrayValueMap(self::$days, $outputArr, $day);
     }
