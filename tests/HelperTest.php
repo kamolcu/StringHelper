@@ -4,7 +4,7 @@ require_once __DIR__ . '/../src/StringHelper.php';
 
 use Kamolcu\StringHelper;
 class HelperTest extends \PHPUnit_Framework_TestCase {
-    public function testGetDayNameAsIndex() {
+    public function testGetDayNameAsIndex(){
         // Normal input 0 - 6 ==> SUN - SAT
         $actual = StringHelper::getThaiDay(StringHelper::SUNDAY);
         $this->assertEquals('วันอาทิตย์', $actual);
@@ -23,10 +23,10 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         // Out of bound input, expects empty string return
         $actual = StringHelper::getThaiDay(10);
         $this->assertEquals('', $actual);
-        $actual = StringHelper::getThaiDay(- 1);
+        $actual = StringHelper::getThaiDay(-1);
         $this->assertEquals('', $actual);
     }
-    public function testDayNameTakeStringInput() {
+    public function testDayNameTakeStringInput(){
         // String input
         $actual = StringHelper::getThaiDay(''); // Empty string
         $this->assertEquals('', $actual);
@@ -85,7 +85,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         $actual = StringHelper::getThaiDay('sAT');
         $this->assertEquals('วันเสาร์', $actual);
     }
-    public function testDayNameAsArrayInput() {
+    public function testDayNameAsArrayInput(){
         // Array input - treat as invalid, return empty string
         $actual = StringHelper::getThaiDay(array());
         $this->assertEquals('', $actual);
@@ -96,17 +96,17 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         ));
         $this->assertEquals('', $actual);
     }
-    public function testMonthNameAsIndex() {
+    public function testMonthNameAsIndex(){
         $actual = StringHelper::getThaiMonth(0);
         $this->assertEquals('', $actual);
         
         $actual = StringHelper::getThaiMonth(15);
         $this->assertEquals('', $actual);
         
-        $actual = StringHelper::getThaiMonth(- 1);
+        $actual = StringHelper::getThaiMonth(-1);
         $this->assertEquals('', $actual);
         
-        $actual = StringHelper::getThaiMonth(- 1.0);
+        $actual = StringHelper::getThaiMonth(-1.0);
         $this->assertEquals('', $actual);
         
         $actual = StringHelper::getThaiMonth(1);
@@ -145,7 +145,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         $actual = StringHelper::getThaiMonth(12);
         $this->assertEquals('ธันวาคม', $actual);
     }
-    public function testMonthNameAsString() {
+    public function testMonthNameAsString(){
         $actual = StringHelper::getThaiMonth('');
         $this->assertEquals('', $actual);
         
@@ -188,7 +188,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         $actual = StringHelper::getThaiMonth('December');
         $this->assertEquals('ธันวาคม', $actual);
     }
-    public function testMonthNameAsArray() {
+    public function testMonthNameAsArray(){
         $actual = StringHelper::getThaiMonth(array());
         $this->assertEquals('', $actual);
         

@@ -57,13 +57,13 @@ class StringHelper {
             self::SATURDAY => 'วันเสาร์' 
     );
     protected static $thaiShortDays = array(
-    		self::SUNDAY => 'อา.',
-    		self::MONDAY => 'จ.',
-    		self::TUESDAY => 'อ.',
-    		self::WEDNESDAY => 'พ.',
-    		self::THURSDAY => 'พฤ.',
-    		self::FRIDAY => 'ศ.',
-    		self::SATURDAY => 'ส.'
+            self::SUNDAY => 'อา.',
+            self::MONDAY => 'จ.',
+            self::TUESDAY => 'อ.',
+            self::WEDNESDAY => 'พ.',
+            self::THURSDAY => 'พฤ.',
+            self::FRIDAY => 'ศ.',
+            self::SATURDAY => 'ส.' 
     );
     protected static $thaiMonths = array(
             self::JANUARY => "มกราคม",
@@ -80,37 +80,46 @@ class StringHelper {
             self::DECEMBER => "ธันวาคม" 
     );
     protected static $thaiShortMonths = array(
-    		self::JANUARY => "ม.ค.",
-    		self::FEBRUARY => "ก.พ.",
-    		self::MARCH => "มี.ค.",
-    		self::APRIL => "เม.ย.",
-    		self::MAY => "พ.ค.",
-    		self::JUNE => "มิ.ย.",
-    		self::JULY => "ก.ค.",
-    		self::AUGUST => "ส.ค.",
-    		self::SEPTEMBER => "ก.ย.",
-    		self::OCTOBER => "ต.ค.",
-    		self::NOVEMBER => "พ.ย.",
-    		self::DECEMBER => "ธ.ค."
+            self::JANUARY => "ม.ค.",
+            self::FEBRUARY => "ก.พ.",
+            self::MARCH => "มี.ค.",
+            self::APRIL => "เม.ย.",
+            self::MAY => "พ.ค.",
+            self::JUNE => "มิ.ย.",
+            self::JULY => "ก.ค.",
+            self::AUGUST => "ส.ค.",
+            self::SEPTEMBER => "ก.ย.",
+            self::OCTOBER => "ต.ค.",
+            self::NOVEMBER => "พ.ย.",
+            self::DECEMBER => "ธ.ค." 
     );
     protected static $thaiNumbers = array(
-    	0 => '๐',
-    	1 => '๑',
-    	2 => '๒',
-    	3 => '๓',
-    	4 => '๔',
-    	5 => '๕',
-    	6 => '๖',
-    	7 => '๗',
-    	8 => '๘',
-    	9 => '๙',
+            0 => '๐',
+            1 => '๑',
+            2 => '๒',
+            3 => '๓',
+            4 => '๔',
+            5 => '๕',
+            6 => '๖',
+            7 => '๗',
+            8 => '๘',
+            9 => '๙' 
     );
-    public static function translateDateStringToThai($inputString) {
+    public static function translateDateStringToThai($inputString){
         $output = '';
         if(is_string($inputString)){
             $datetime = strtotime($inputString);
             if($datetime){
                 $output = strtoupper($inputString);
+                // Process for year
+                $pos = self::get4DigitsYearPos($output);
+                if($pos >= 0){
+                    $year = substr($output, $pos, 4);
+                    $withBuddhistYearPrefix = true;
+                    $thaiYear = self::getBuddhistCalendarYear($year, $withBuddhistYearPrefix);
+                    $output = str_replace($year, $thaiYear, $output);
+                }
+                // Process for month
                 foreach(self::$months as $key => $value){
                     $value = strtoupper($value);
                     $pos = strrpos($output, $value);
@@ -119,6 +128,7 @@ class StringHelper {
                         break;
                     }
                 }
+                // Process for day
                 foreach(self::$days as $key => $value){
                     $value = strtoupper($value);
                     $pos = strrpos($output, $value);
@@ -132,7 +142,18 @@ class StringHelper {
         }
         return $output;
     }
-    private static function getArrayValueMap($arrayMap, $arrayOutput, $inputValue) {
+    public static function get4DigitsYearPos($subject){
+        $output = -1;
+        $pattern = '/\d{4}/';
+        if(is_string($subject) && strtotime($subject)){
+            preg_match($pattern, $subject, $matches, PREG_OFFSET_CAPTURE);
+            if(is_array($matches) && count($matches) === 1){
+                return $matches[0][1];
+            }
+        }
+        return $output;
+    }
+    private static function getArrayValueMap($arrayMap, $arrayOutput, $inputValue){
         // default return value
         $output = '';
         // handle index input
@@ -153,13 +174,13 @@ class StringHelper {
         }
         return $output;
     }
-    public static function getThaiMonth($month) {
+    public static function getThaiMonth($month){
         return self::getArrayValueMap(self::$months, self::$thaiMonths, $month);
     }
-    public static function getThaiDay($day) {
+    public static function getThaiDay($day){
         return self::getArrayValueMap(self::$days, self::$thaiDays, $day);
     }
-    public static function getBuddhistCalendarYear($yearInput, $withBuddhistYearPrefix = false, $prefix = 'พ.ศ.') {
+    public static function getBuddhistCalendarYear($yearInput, $withBuddhistYearPrefix = false, $prefix = 'พ.ศ.'){
         $output = '';
         if(is_numeric($yearInput) && is_int(intVal($yearInput))){
             $yearOutput = intVal($yearInput) + 543;
