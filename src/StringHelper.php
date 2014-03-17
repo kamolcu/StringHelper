@@ -174,7 +174,12 @@ class StringHelper{
                         break;
                     }
                 }
-                $output = str_replace('-', ' ', $output);
+                $patterns = array(
+                        '/-/', '/,/' 
+                );
+                $replacements = array(' ', '');
+                $output = preg_replace($patterns, $replacements, $output);
+                //$output = str_replace('-', ' ', $output);
             }
         }
         return $output;

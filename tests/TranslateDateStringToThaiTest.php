@@ -171,7 +171,7 @@ class TranslateDateStringToThaiTest extends \PHPUnit_Framework_TestCase{
 				'30-June',
 				'July',
 				'7 January 2011',
-		        'DEC 1978'
+		        'DEC, 1978'
 		);
 		$expectedArr = array(
 				'30 มิถุนายน',
