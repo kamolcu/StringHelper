@@ -155,7 +155,6 @@ class StringHelper{
                     );
                     $replacements = array(' ');
                     $output = preg_replace($patterns, $replacements, $output);
-                    //$output = str_replace('  ', ' ', $output);
                 }
                 // Process for month
                 foreach(self::$months as $key => $value){
@@ -185,7 +184,6 @@ class StringHelper{
                 );
                 $replacements = array(' ', '');
                 $output = preg_replace($patterns, $replacements, $output);
-                //$output = str_replace('-', ' ', $output);
             }
         }
         return $output;
