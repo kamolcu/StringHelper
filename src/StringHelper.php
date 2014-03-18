@@ -149,7 +149,13 @@ class StringHelper{
                     $year = substr($output, $pos, 4);
                     $withBuddhistYearPrefix = true;
                     $thaiYear = self::getBuddhistCalendarYear($year, $withBuddhistYearPrefix);
-                    $output = str_replace($year, $thaiYear, $output);
+                    $output = str_replace($year, ' ' . $thaiYear, $output);
+                    $patterns = array(
+                    		'/[ ]+/'
+                    );
+                    $replacements = array(' ');
+                    $output = preg_replace($patterns, $replacements, $output);
+                    //$output = str_replace('  ', ' ', $output);
                 }
                 // Process for month
                 foreach(self::$months as $key => $value){

@@ -171,13 +171,17 @@ class TranslateDateStringToThaiTest extends \PHPUnit_Framework_TestCase{
 				'30-June',
 				'July',
 				'7 January 2011',
-		        'DEC, 1978'
+		        'DEC, 1978',
+		        'JAN1111',
+		        'FEB     2014'
 		);
 		$expectedArr = array(
 				'30 มิถุนายน',
 				'กรกฎาคม',
 				'7 มกราคม พ.ศ. 2554',
-		        'ธันวาคม พ.ศ. 2521'
+		        'ธันวาคม พ.ศ. 2521',
+		        'มกราคม พ.ศ. 1654',
+		        'กุมภาพันธ์ พ.ศ. 2557'
 		);
 		foreach($inputArr as $key => $value){
 			$actual = StringHelper::translateDateStringToThai($value);
